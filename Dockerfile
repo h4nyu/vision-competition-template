@@ -30,6 +30,6 @@ RUN cd /usr/bin \
 RUN pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
 WORKDIR /srv
-COPY . .
-RUN pip install --no-cache-dir scikit-build \
-    && pip install --no-cache-dir -e .[develop]
+# COPY . .
+# RUN pip install --no-cache-dir scikit-build \
+#     && pip install --no-cache-dir -e .[develop]
