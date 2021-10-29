@@ -27,7 +27,8 @@ RUN cd /usr/bin \
 	&& ln -s python3 python \
 	&& ln -s python3-config python-config
 
-RUN pip install --no-cache-dir torch==1.8.0+cu111 torchvision==0.9.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+
 WORKDIR /srv
 COPY . .
 RUN pip install --no-cache-dir scikit-build \
