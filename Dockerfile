@@ -25,12 +25,15 @@ RUN cd /usr/bin \
 	&& ln -s pydoc3 pydoc \
 	&& ln -s python3 python \
 	&& ln -s python3-config python-config
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - 
-RUN poetry config virtualenvs.create false 
-    
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - \
+    && poetry config virtualenvs.create false 
+
+
+WORKDIR /app
+COPY . .
+RUN poetry install
+
 # RUN pip install torch==1.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 # RUN pip install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-WORKDIR /app
-# COPY . .
 # RUN pip install --no-cache-dir scikit-build \
 #     && pip install --no-cache-dir -e .[develop]
