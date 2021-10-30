@@ -26,7 +26,8 @@ RUN cd /usr/bin \
 	&& ln -s python3 python \
 	&& ln -s python3-config python-config
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - \
-    && poetry config virtualenvs.create false 
+    && poetry config virtualenvs.create false \
+    && poetry config experimental.new-installer false
 
 
 WORKDIR /app
