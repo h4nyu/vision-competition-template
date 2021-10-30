@@ -3,7 +3,7 @@ FROM debian:buster-slim
 ENV CUDA_VERSION 11.1.1 
 ENV CUDA_PKG_VERSION 10-2=$CUDA_VERSION-1
 ENV NVIDIA_VISIBLE_DEVICES all
-ENV PATH /usr/local/cuda/bin:/usr/local/nvidia/bin:/root/.poetry/bin:${PATH}
+ENV PATH /usr/local/cuda/bin:/usr/local/nvidia/bin:/root/.local/bin:${PATH}
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 ENV NVIDIA_REQUIRE_CUDA "cuda>=11.1 brand=tesla,driver>=418,driver<419 brand=tesla,driver>=440,driver<441 driver>=450,driver<451"
@@ -28,7 +28,7 @@ RUN cd /usr/bin \
 	&& ln -s python3-config python-config
 
 RUN pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
 WORKDIR /srv
 # COPY . .
 # RUN pip install --no-cache-dir scikit-build \
