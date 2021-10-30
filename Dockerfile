@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 ENV CUDA_VERSION 11.1.1 
 ENV CUDA_PKG_VERSION 10-2=$CUDA_VERSION-1
@@ -22,14 +22,15 @@ RUN apt-get update \
 
 RUN cd /usr/bin \
 	&& ln -s idle3 idle \
-	&& ln -s pip3 pip \
 	&& ln -s pydoc3 pydoc \
 	&& ln -s python3 python \
 	&& ln -s python3-config python-config
-
-RUN pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
-WORKDIR /srv
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python - 
+RUN poetry config virtualenvs.create false 
+    
+# RUN pip install torch==1.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+# RUN pip install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+WORKDIR /app
 # COPY . .
 # RUN pip install --no-cache-dir scikit-build \
 #     && pip install --no-cache-dir -e .[develop]
